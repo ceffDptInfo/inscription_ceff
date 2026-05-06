@@ -69,35 +69,35 @@ const submit = () => {
                                 <div class="row mb-3 align-items-center">
                                     <label class="col-12 col-md-4 col-form-label fw-medium">Rue et No</label>
                                     <div class="col-12 col-md-8">
-                                        <input type="text" class="form-control" v-model="form.rue_et_num">
+                                        <input type="text" class="form-control" v-model="form.rue_et_num" required>
                                     </div>
                                 </div>
 
                                 <div class="row mb-3 align-items-center">
                                     <label class="col-12 col-md-4 col-form-label fw-medium">NPA + Localité</label>
                                     <div class="col-12 col-md-8">
-                                        <input type="text" class="form-control" v-model="form.npa_localite">
+                                        <input type="text" class="form-control" v-model="form.npa_localite" required>
                                     </div>
                                 </div>
 
                                 <div class="row mb-3 align-items-center">
                                     <label class="col-12 col-md-4 col-form-label fw-medium">Date de naissance</label>
                                     <div class="col-12 col-md-8">
-                                        <input type="date" class="form-control" v-model="form.date_naissance">
+                                        <input type="date" class="form-control" v-model="form.date_naissance" required>
                                     </div>
                                 </div>
 
                                 <div class="row mb-3 align-items-center">
                                     <label class="col-12 col-md-4 col-form-label fw-medium">Langue maternelle</label>
                                     <div class="col-12 col-md-8">
-                                        <input type="text" class="form-control" v-model="form.langue_maternelle">
+                                        <input type="text" class="form-control" v-model="form.langue_maternelle" required>
                                     </div>
                                 </div>
 
                                 <div class="row mb-3 align-items-center">
                                     <label class="col-12 col-md-4 col-form-label fw-medium">No AVS</label>
                                     <div class="col-12 col-md-8">
-                                        <input type="text" class="form-control" placeholder="756.xxxx.xxxx.xx" v-model="form.no_avs">
+                                        <input type="text" class="form-control" placeholder="756.xxxx.xxxx.xx" v-model="form.no_avs" required>
                                     </div>
                                 </div>
 
@@ -111,14 +111,14 @@ const submit = () => {
                                 <div class="row mb-3 align-items-center">
                                     <label class="col-12 col-md-4 col-form-label fw-medium">Tél. portable</label>
                                     <div class="col-12 col-md-8">
-                                        <input type="text" class="form-control" v-model="form.tel_portable">
+                                        <input type="text" class="form-control" v-model="form.tel_portable" required>
                                     </div>
                                 </div>
 
                                 <div class="row mb-3 align-items-center">
                                     <label class="col-12 col-md-4 col-form-label fw-medium">E-mail privé</label>
                                     <div class="col-12 col-md-8">
-                                        <input type="email" class="form-control" v-model="form.email_prive">
+                                        <input type="email" class="form-control" v-model="form.email_prive" required>
                                     </div>
                                 </div>
                             </div>
@@ -128,7 +128,7 @@ const submit = () => {
                                 <div class="row mb-3 align-items-center">
                                     <label class="col-12 col-md-4 col-form-label fw-medium">Genre</label>
                                     <div class="col-12 col-md-8">
-                                        <select class="form-select bg-light" v-model="form.genre">
+                                        <select class="form-select bg-light" v-model="form.genre" required>
                                             <option value="" disabled>Sélectionner...</option>
                                             <option value="Homme">Homme</option>
                                             <option value="Femme">Femme</option>

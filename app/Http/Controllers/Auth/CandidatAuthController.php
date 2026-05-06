@@ -19,16 +19,17 @@ class CandidatAuthController extends Controller
             'email' => 'required|email',
         ]);
 
-        $token = Str::random(64);
-
         $candidatExistant = Candidat::where('email', $request->email)->first();
+
+        if ($candidatExistant && $candidatExistant->statut === 'Candidature complète') {
+            return back()->withErrors(['email' => 'Vous avez déjà soumis votre candidature.']);
+        }
+
+        $token = Str::random(64);
 
         if ($candidatExistant) {
             $candidatExistant->token = $token;
-            $candidatExistant->statut = 'Nouveau Candidat';
-            $candidatExistant->date_creation = now();
             $candidatExistant->save();
-
             $candidat = $candidatExistant;
         } else {
             $nouveauCandidat = new Candidat();

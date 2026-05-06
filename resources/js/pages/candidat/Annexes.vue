@@ -1,4 +1,5 @@
 <script setup>
+import { ref } from 'vue';
 import { useForm } from '@inertiajs/vue3';
 import AppHeader from '@/components/AppHeader.vue';
 
@@ -14,13 +15,23 @@ const props = defineProps({
 });
 
 const form = useForm({});
+const showModal = ref(false);
 
-const submit = () => {
+const openModal = () => {
     if (props.documents_manquants.length === 0) {
-        form.post('/soumission-finale', {
-            preserveScroll: true
-        });
+        showModal.value = true;
     }
+};
+
+const closeModal = () => {
+    showModal.value = false;
+};
+
+const confirmSubmit = () => {
+    showModal.value = false;
+    form.post('/form', {
+        preserveScroll: true
+    });
 };
 </script>
 
@@ -36,7 +47,7 @@ const submit = () => {
             <div class="card shadow-sm border-0 mt-3 mt-md-4">
                 
                 <div class="card-body p-3 p-md-4">
-                    <form @submit.prevent="submit">
+                    <form @submit.prevent="openModal">
                         
                         <div v-if="documents_manquants.length > 0" class="alert alert-warning mb-4 border-warning">
                             <h5 class="alert-heading fw-bold mb-3 text-warning-emphasis">
@@ -64,6 +75,10 @@ const submit = () => {
                                         {{ annexe.description }}
                                     </div>
                                 </div>
+                                
+                                <div v-if="annexes.length === 0" class="text-muted fst-italic">
+                                    Aucune annexe n'a été ajoutée.
+                                </div>
                             </div>
                         </div>
 
@@ -86,5 +101,27 @@ const submit = () => {
                 </div>
             </div>
         </div>
+
+        <div v-if="showModal" class="modal fade show d-block"  style="background-color: rgba(0,0,0,0.5);">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header pb-0">
+                        <h5 class="modal-title fw-bold">Confirmation de soumission</h5>
+                        <button type="button" class="btn-close" @click="closeModal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body py-4">
+                        <p class="mb-0">Êtes-vous sûr de vouloir soumettre votre candidature ?</p>
+                        <p class="text-danger mt-2 fw-medium mb-0">Attention : Une fois soumise, vous n'aurez plus accès à votre dossier pour le modifier.</p>
+                    </div>
+                    <div class="modal-footer border-top-0 pt-0">
+                        <button type="button" class="btn btn-light border fw-medium" @click="closeModal">Annuler</button>
+                        <button type="button" class="btn text-white fw-bold" style="background-color: #16a34a;" @click="confirmSubmit" :disabled="form.processing">
+                            Confirmer l'envoi
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
     </div>
 </template>

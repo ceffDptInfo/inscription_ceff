@@ -66,14 +66,14 @@ const submit = () => {
                                     <div class="row mb-3 align-items-center">
                                         <label class="col-12 col-md-5 col-form-label fw-medium">Nom de l'école</label>
                                         <div class="col-12 col-md-7">
-                                            <input type="text" class="form-control" v-model="form.nom_ecole">
+                                            <input type="text" class="form-control" v-model="form.nom_ecole" required>
                                         </div>
                                     </div>
 
                                     <div class="row mb-3 align-items-center">
                                         <label class="col-12 col-md-5 col-form-label fw-medium">Lieu de l'école</label>
                                         <div class="col-12 col-md-7">
-                                            <input type="text" class="form-control" v-model="form.lieu_ecole">
+                                            <input type="text" class="form-control" v-model="form.lieu_ecole" required>
                                         </div>
                                     </div>
                                 </template>
@@ -120,7 +120,7 @@ const submit = () => {
                                     <div class="row mb-3 align-items-center">
                                         <label class="col-12 col-md-5 col-form-label fw-medium">Français</label>
                                         <div class="col-12 col-md-7">
-                                            <select class="form-select" v-model="form.niveau_francais">
+                                            <select class="form-select" v-model="form.niveau_francais" required>
                                                 <option value="" disabled></option>
                                                 <option value="A">A</option>
                                                 <option value="B">B</option>
@@ -132,7 +132,7 @@ const submit = () => {
                                     <div class="row mb-3 align-items-center">
                                         <label class="col-12 col-md-5 col-form-label fw-medium">Math</label>
                                         <div class="col-12 col-md-7">
-                                            <select class="form-select" v-model="form.niveau_math">
+                                            <select class="form-select" v-model="form.niveau_math" required>
                                                 <option value="" disabled></option>
                                                 <option value="A">A</option>
                                                 <option value="B">B</option>
@@ -144,7 +144,7 @@ const submit = () => {
                                     <div class="row mb-3 align-items-center">
                                         <label class="col-12 col-md-5 col-form-label fw-medium">Allemand</label>
                                         <div class="col-12 col-md-7">
-                                            <select class="form-select" v-model="form.niveau_allemand">
+                                            <select class="form-select" v-model="form.niveau_allemand" required>
                                                 <option value="" disabled></option>
                                                 <option value="A">A</option>
                                                 <option value="B">B</option>

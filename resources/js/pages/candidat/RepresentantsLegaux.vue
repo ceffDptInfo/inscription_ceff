@@ -92,28 +92,28 @@ const submit = () => {
                                 <div class="row mb-3 align-items-center">
                                     <label class="col-12 col-md-4 col-form-label fw-medium">Nom</label>
                                     <div class="col-12 col-md-8">
-                                        <input type="text" class="form-control" v-model="form.rep1.nom">
+                                        <input type="text" class="form-control" v-model="form.rep1.nom" required>
                                     </div>
                                 </div>
 
                                 <div class="row mb-3 align-items-center">
                                     <label class="col-12 col-md-4 col-form-label fw-medium">Prénom</label>
                                     <div class="col-12 col-md-8">
-                                        <input type="text" class="form-control" v-model="form.rep1.prenom">
+                                        <input type="text" class="form-control" v-model="form.rep1.prenom" required>
                                     </div>
                                 </div>
 
                                 <div class="row mb-3 align-items-center">
                                     <label class="col-12 col-md-4 col-form-label fw-medium">Rue et No</label>
                                     <div class="col-12 col-md-8">
-                                        <input type="text" class="form-control" v-model="form.rep1.rue_et_num">
+                                        <input type="text" class="form-control" v-model="form.rep1.rue_et_num" required>
                                     </div>
                                 </div>
 
                                 <div class="row mb-3 align-items-center">
                                     <label class="col-12 col-md-4 col-form-label fw-medium">NPA Localité</label>
                                     <div class="col-12 col-md-8">
-                                        <input type="text" class="form-control" v-model="form.rep1.npa_localite">
+                                        <input type="text" class="form-control" v-model="form.rep1.npa_localite" required>
                                     </div>
                                 </div>
 
@@ -127,14 +127,14 @@ const submit = () => {
                                 <div class="row mb-3 align-items-center">
                                     <label class="col-12 col-md-4 col-form-label fw-medium">Tél. portable</label>
                                     <div class="col-12 col-md-8">
-                                        <input type="text" class="form-control" v-model="form.rep1.tel_portable">
+                                        <input type="text" class="form-control" v-model="form.rep1.tel_portable" required>
                                     </div>
                                 </div>
 
                                 <div class="row mb-3 align-items-center">
                                     <label class="col-12 col-md-4 col-form-label fw-medium">E-mail privé</label>
                                     <div class="col-12 col-md-8">
-                                        <input type="email" class="form-control" v-model="form.rep1.email">
+                                        <input type="email" class="form-control" v-model="form.rep1.email" required>
                                     </div>
                                 </div>
 

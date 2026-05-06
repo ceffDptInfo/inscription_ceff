@@ -4,8 +4,10 @@ use App\Http\Controllers\AnnexesController;
 use App\Http\Controllers\Auth\CandidatAuthController;
 use App\Http\Controllers\Auth\SecretaireAuthController;
 use App\Http\Controllers\AutreInscriptionController;
+use App\Http\Controllers\CandidatController;
 use App\Http\Controllers\ChoixApprentissageController;
 use App\Http\Controllers\DonneesPersonnellesController;
+use App\Http\Controllers\FormController;
 use App\Http\Controllers\InformationsController;
 use App\Http\Controllers\ParcoursScolaireController;
 use App\Http\Controllers\RepresentantLegalController;
@@ -58,6 +60,7 @@ Route::middleware([EnsureCandidat::class])->group(function () {
     Route::post('/autres-inscriptions', [AutreInscriptionController::class, 'store'])->name('autres-inscriptions.store');
     Route::post('/informations', [InformationsController::class, 'store'])->name('informations.store');
     Route::post('/choix-apprentissage', [ChoixApprentissageController::class, 'store'])->name('choix-apprentissage.store');
+    Route::post('/form', [CandidatController::class, 'submitForm'])->name('form.store');
 });
 
 

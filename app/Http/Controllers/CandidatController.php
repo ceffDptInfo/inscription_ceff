@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Mail\ConfirmationInscriptionMail;
 use App\Models\Candidat;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Str;
 use Inertia\Inertia;
+use Mail;
 
 class CandidatController extends Controller
 {
@@ -52,25 +54,17 @@ class CandidatController extends Controller
         return route('candidats.show', ['candidat' => $candidat->id]);
     }
 
-    public function update(Request $request, Candidat $candidat)
+    public function submitForm()
     {
-        $validated = $request->validate([
-            'statut' => 'required|string',
-        ]);
+        $candidatId = session('candidat_id');
+        $candidat = Candidat::findOrFail($candidatId);
 
-        $candidat->update($validated);
+        Candidat::where('id', $candidatId)->update(['token' => '', 'statut' => 'Candidature complète']);
 
-        return response()->json([
-            'message' => 'success',
-        ]);
-    }
+        Mail::to($candidat->email)->send(new ConfirmationInscriptionMail());
 
-    public function destroy(Candidat $candidat)
-    {
-        $candidat->delete();
+        session()->forget('candidat_id');
 
-        return response()->json([
-            'message' => 'success',
-        ]);
+        return redirect()->route('candidat-login')->with('success', 'formulaire soumis avec success');
     }
 }
