@@ -24,6 +24,8 @@ createInertiaApp({
             'candidat/ParcoursScolaire',
             'candidat/RepresentantsLegaux',
             'candidat/Stages',
+            'secretaire/ListeCandidats',
+            'secretaire/CandidatDetails'
         ];
 
         if (noLayoutPages.includes(name)) {

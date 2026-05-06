@@ -5,6 +5,10 @@ defineProps({
     showLogout: {
         type: Boolean,
         default: false,
+    },
+    logoutRoute: {
+        type: String,
+        default: '/candidat-logout',
     }
 });
 </script>
@@ -15,7 +19,7 @@ defineProps({
 
         <Link 
             v-if="showLogout"
-            href="/candidat-logout"
+            :href="logoutRoute"
             method="post"
             as="button"
             class="btn btn-danger rounded-circle d-flex justify-content-center align-items-center position-absolute end-0 me-4"

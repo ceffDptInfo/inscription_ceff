@@ -3,30 +3,53 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use App\Models\Secretaire;
+use App\Models\Candidat;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 
 class SecretaireController extends Controller
 {
     public function index()
     {
-        return route('secretaires.index');
+        $candidats = Candidat::with('donneesPersonnelles')->get();
+
+        Log::info($candidats);
+
+        return inertia('secretaire/ListeCandidats', [
+            'candidats' => $candidats,
+        ]);
     }
 
-    public function store(Request $request)
+    public function updateStatut(Request $request, $id)
     {
-        $validated = $request->validate([
-            'email' => 'required|email|unique:secretaires,email',
-            'password' => 'required|stringrs|min:6',
+        $request->validate([
+            'statut' => 'required|string',
         ]);
 
-        Secretaire::create([
-            'email' => $validated['email'],
-            'password' => bcrypt($validated['password']),
+        $candidat = Candidat::findOrFail($id);
+        $candidat->update([
+            'statut' => $request->statut,
         ]);
 
-        return response()->json([
-            'message' => 'success',
-        ], 201);
+        return back();
+    }
+
+    public function showCandidat()
+    {
+        return inertia('secretaire/CandidatDetails');
+    }
+
+    public function deleteCandidat($id)
+    {
+        $candidat = Candidat::findOrFail($id);
+
+        $nomDossier = $candidat->dossier_nom;
+
+        Storage::disk('public')->deleteDirectory($nomDossier);
+
+        $candidat->delete();
+
+        return back()->with('success', 'Candidat supprimé avec success');
     }
 }

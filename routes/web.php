@@ -11,6 +11,7 @@ use App\Http\Controllers\FormController;
 use App\Http\Controllers\InformationsController;
 use App\Http\Controllers\ParcoursScolaireController;
 use App\Http\Controllers\RepresentantLegalController;
+use App\Http\Controllers\SecretaireController;
 use App\Http\Controllers\StageController;
 use App\Http\Middleware\EnsureCandidat;
 use Illuminate\Support\Facades\Route;
@@ -40,6 +41,7 @@ Route::post('send-link', [CandidatAuthController::class, 'sendLink']);
 Route::get('/verify-candidat/{token}', [CandidatAuthController::class, 'verifyToken'])->name('verify.candidat');
 
 Route::post('/candidat-logout', [CandidatAuthController::class, 'logout'])->name('candidat.logout');
+Route::post('/secretaire-logout', [SecretaireAuthController::class, 'logout'])->name('secretaire.logout');
 
 //candidat routes
 Route::middleware([EnsureCandidat::class])->group(function () {
@@ -66,9 +68,14 @@ Route::middleware([EnsureCandidat::class])->group(function () {
 
 
 // secretaire routes
-Route::get('/liste-candidats', function () {
-    return inertia('secretaire/ListeCandidats');
-})->name('liste-candidats')->middleware('auth:secretaire');
+Route::middleware('auth:secretaire')->group(function () {
+    Route::get('/liste-candidats', [SecretaireController::class, 'index'])->name('liste-candidats');
+    Route::get('/candidat-details/{id}', [SecretaireController::class, 'showCandidat'])->name('candidat-details');
+
+    Route::put('/liste-candidats/{id}/statut', [SecretaireController::class, 'updateStatut'])->name('liste-candidats.update-statut');
+    Route::delete('/candidat/{id}', [SecretaireController::class, 'deleteCandidat'])->name('candidat.delete');
+});
+
 
 
 
