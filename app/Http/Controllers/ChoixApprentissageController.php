@@ -41,16 +41,4 @@ class ChoixApprentissageController extends Controller
 
         return redirect()->route('annexes')->with('success', 'Choix apprentissage enregistre avec success');
     }
-
-    public function update(Request $request, ChoixApprentissage $choix)
-    {
-        $validated = $request->validate([
-            'premier_choix' => 'nullable|string|max:255',
-            'deuxieme_choix' => 'nullable|string|max:255',
-        ]);
-
-        $choix->update($validated);
-
-        return response()->json(['message' => 'success'], 200);
-    }
 }

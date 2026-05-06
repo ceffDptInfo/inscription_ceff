@@ -3,7 +3,9 @@ import { useForm } from '@inertiajs/vue3';
 import AppHeader from '@/components/AppHeader.vue';
 
 const props = defineProps({
-    donnees: Object
+    donnees: Object,
+    fichier_permis: String,
+    fichier_photo: String
 });
 
 const form = useForm({
@@ -180,7 +182,7 @@ const submit = () => {
                                         <label class="col-12 col-md-4 col-form-label fw-medium">Copie du permis</label>
                                         <div class="col-12 col-md-8">
                                             <label for="document_permis" class="btn btn-outline-secondary w-100 d-block text-truncate mb-0 px-4">
-                                                {{ form.document_permis ? form.document_permis.name : '+' }}
+                                                {{ form.document_permis ? form.document_permis.name : (props.fichier_permis || '+') }}
                                             </label>
                                             <input type="file" id="document_permis" class="d-none" @input="form.document_permis = $event.target.files[0]">
                                         </div>
@@ -191,7 +193,7 @@ const submit = () => {
                                     <label class="col-12 col-md-4 col-form-label fw-medium">Photo portrait</label>
                                     <div class="col-12 col-md-8">
                                         <label for="photo_portrait" class="btn btn-outline-secondary w-100 d-block text-truncate mb-0 px-4">
-                                            {{ form.photo_portrait ? form.photo_portrait.name : '+' }}
+                                            {{ form.photo_portrait ? form.photo_portrait.name : (props.fichier_photo || '+') }}
                                         </label>
                                         <input type="file" id="photo_portrait" class="d-none" accept="image/*" @input="form.photo_portrait = $event.target.files[0]">
                                     </div>

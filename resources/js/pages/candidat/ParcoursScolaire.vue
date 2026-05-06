@@ -3,7 +3,9 @@ import { useForm, Link } from '@inertiajs/vue3';
 import AppHeader from '@/components/AppHeader.vue';
 
 const props = defineProps({
-    parcours: Object
+    parcours: Object,
+    bulletin: String,
+    cv: String,
 });
 
 const form = useForm({
@@ -14,6 +16,8 @@ const form = useForm({
     niveau_math: props.parcours?.niveau_math ?? '',
     niveau_allemand: props.parcours?.niveau_allemand ?? '',
     description_activite: props.parcours?.description_activite ?? '',
+    bulletin_scolaire: null,
+    cv: null,
 });
 
 const submit = () => {
@@ -79,7 +83,7 @@ const submit = () => {
                                         <label class="col-12 col-md-5 col-form-label fw-medium">Dernier bulletin scolaire en date</label>
                                         <div class="col-12 col-md-7">
                                             <label for="bulletin_scolaire" class="btn btn-light border text-secondary w-100 d-flex justify-content-center align-items-center mb-0 text-truncate px-2" style="height: 38px;">
-                                                {{ form.bulletin_scolaire ? form.bulletin_scolaire.name : '+' }}
+                                                {{ form.bulletin_scolaire ? form.bulletin_scolaire.name : (bulletin || '+') }}
                                             </label>
                                             <input type="file" id="bulletin_scolaire" class="d-none" @input="form.bulletin_scolaire = $event.target.files[0]">
                                         </div>
@@ -98,7 +102,7 @@ const submit = () => {
                                         <label class="col-12 col-md-5 col-form-label fw-medium">CV</label>
                                         <div class="col-12 col-md-7">
                                             <label for="cv" class="btn btn-light border text-secondary w-100 d-flex justify-content-center align-items-center mb-0 text-truncate px-2" style="height: 38px;">
-                                                {{ form.cv ? form.cv.name : '+' }}
+                                                {{ form.cv ? form.cv.name : (cv || '+') }}
                                             </label>
                                             <input type="file" id="cv" class="d-none" @input="form.cv = $event.target.files[0]">
                                         </div>

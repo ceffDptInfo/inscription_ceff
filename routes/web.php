@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AnnexesController;
 use App\Http\Controllers\Auth\CandidatAuthController;
 use App\Http\Controllers\Auth\SecretaireAuthController;
 use App\Http\Controllers\AutreInscriptionController;
@@ -42,9 +43,7 @@ Route::post('/candidat-logout', [CandidatAuthController::class, 'logout'])->name
 Route::middleware([EnsureCandidat::class])->group(function () {
     Route::get('/donnees-personnelles', [DonneesPersonnellesController::class, 'index'])->name('donnees-personnelles');
 
-    Route::get('/annexes', function () {
-        return inertia('candidat/Annexes');
-    })->name('annexes');
+    Route::get('/annexes', [AnnexesController::class, 'index'])->name('annexes');
     Route::get('/autres-inscriptions', [AutreInscriptionController::class, 'index'])->name('autres-inscriptions');
     Route::get('/choix-apprentissage', [ChoixApprentissageController::class, 'index'])->name('choix-apprentissage');
     Route::get('/informations', [InformationsController::class, 'index'])->name('informations');

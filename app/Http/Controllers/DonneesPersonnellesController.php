@@ -5,12 +5,12 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\Candidat;
 use App\Models\DonneesPersonnelles;
+use App\Models\FichierJoint;
 use App\Services\FichierJointService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Inertia\Inertia;
-
 
 class DonneesPersonnellesController extends Controller
 {
@@ -27,8 +27,13 @@ class DonneesPersonnellesController extends Controller
 
         $datas = DonneesPersonnelles::where('candidat_id', $candidatId)->first();
 
+        $fichierPermis = FichierJoint::where('candidat_id', $candidatId)->where('type_document', 'permis de séjour')->first();
+        $fichierPhoto = FichierJoint::where('candidat_id', $candidatId)->where('type_document', 'photo portrait')->first();
+
         return inertia('candidat/DonneesPersonnelles', [
             'donnees' => $datas,
+            'fichier_permis' => $fichierPermis ? $fichierPermis->nom_fichier : null,
+            'fichier_photo' => $fichierPhoto ? $fichierPhoto->nom_fichier : null,
         ]);
     }
 
@@ -83,33 +88,5 @@ class DonneesPersonnellesController extends Controller
         );
 
         return redirect()->route('representants-legaux')->with('success', 'donnees personnelles enregistrées');
-    }
-
-    public function update(DonneesPersonnelles $donneesPersonnelles)
-    {
-        $validated = request()->validate([
-            'nom' => 'nullable|string|max:255',
-            'prenom' => 'nullable|string|max:255',
-            'rue_et_num' => 'nullable|string|max:255',
-            'npa_localite' => 'nullable|string|max:255',
-            'date_naissance' => 'nullable|date',
-            'langue_maternelle' => 'nullable|string|max:255',
-            'no_avs' => 'nullable|string|max:255',
-            'tel_fixe' => 'nullable|string|max:255',
-            'tel_portable' => 'nullable|string|max:255',
-            'email_prive' => 'nullable|email|max:255',
-            'genre' => 'nullable|string|max:255',
-            'nationalite' => 'nullable|string|max:255',
-            'pays_origine' => 'nullable|string|max:255',
-            'type_permis' => 'nullable|string|max:255',
-            'validite_permis' => 'nullable|date',
-            'remarques' => 'nullable|string',
-        ]);
-
-        $donneesPersonnelles->update($validated);
-
-        return response()->json([
-            'message' => 'success',
-        ], 200);
     }
 }

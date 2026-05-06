@@ -47,25 +47,4 @@ class StageController extends Controller
 
         return redirect()->route('autres-inscriptions')->with('success', 'stages enregistrés');
     }
-
-    public function update(Request $request, Stage $stage)
-    {
-        $validated = $request->validate([
-            'metier' => 'nullable|string|max:255',
-            'entreprise' => 'nullable|string|max:255',
-            'lieu' => 'nullable|string|max:255',
-            'duree' => 'nullable|string|max:255',
-        ]);
-
-        $stage->update($validated);
-
-        return response()->json(['message' => 'success'], 200);
-    }
-
-    public function destroy(Stage $stage)
-    {
-        $stage->delete();
-
-        return response()->json(['message' => 'deleted'], 200);
-    }
 }

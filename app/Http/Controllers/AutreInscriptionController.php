@@ -41,23 +41,4 @@ class AutreInscriptionController extends Controller
 
         return redirect()->route('informations')->with('success', 'Inscriptions enregistrés avec success');
     }
-
-    public function update(Request $request, AutreInscription $autreInscription)
-    {
-        $validated = $request->validate([
-            'etablissement' => 'nullable|string|max:255',
-            'lieu' => 'nullable|string|max:255',
-        ]);
-
-        $autreInscription->update($validated);
-
-        return response()->json(['message' => 'success'], 200);
-    }
-
-    public function destroy(AutreInscription $autreInscription)
-    {
-        $autreInscription->delete();
-
-        return response()->json(['message' => 'deleted'], 200);
-    }
 }

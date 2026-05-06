@@ -4,7 +4,9 @@ import AppHeader from '@/components/AppHeader.vue';
 
 const props = defineProps({
     compensation: Boolean,
-    autorisation: Boolean
+    autorisation: Boolean,
+    fichier_compensation: String,
+    fichier_autorisation: String,
 });
 
 const form = useForm({
@@ -16,7 +18,7 @@ const form = useForm({
 
 const submit = () => {
     form.post('/informations', {
-        forceFormData: true, // Requis pour envoyer des fichiers (multipart/form-data)
+        forceFormData: true,
     });
 };
 </script>
@@ -62,7 +64,7 @@ const submit = () => {
                             </label>
                             <div class="col-12 col-md-7">
                                 <label for="document_compensation" class="btn btn-outline-secondary w-100 d-block text-truncate mb-0 px-4 bg-white">
-                                    {{ form.document_compensation ? form.document_compensation.name : '+ Ajouter une annexe' }}
+                                    {{ form.document_compensation ? form.document_compensation.name : (fichier_compensation || '+') }}
                                 </label>
                                 <input type="file" id="document_compensation" class="d-none" @input="form.document_compensation = $event.target.files[0]">
                             </div>
@@ -96,7 +98,7 @@ const submit = () => {
                             </label>
                             <div class="col-12 col-md-7">
                                 <label for="document_autorisation" class="btn btn-outline-secondary w-100 d-block text-truncate mb-0 px-4 bg-white">
-                                    {{ form.document_autorisation ? form.document_autorisation.name : '+ Ajouter une annexe' }}
+                                    {{ form.document_autorisation ? form.document_autorisation.name : (fichier_autorisation || '+') }}
                                 </label>
                                 <input type="file" id="document_autorisation" class="d-none" @input="form.document_autorisation = $event.target.files[0]">
                             </div>

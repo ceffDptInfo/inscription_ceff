@@ -66,29 +66,4 @@ class RepresentantLegalController extends Controller
 
         return redirect()->route('parcours-scolaire')->with('success', 'representants legaux enregistrés');
     }
-
-    public function update(Request $request, RepresentantLegal $representant)
-    {
-        $validated = $request->validate([
-            'type_lien' => 'nullable|string|max:255',
-            'nom' => 'nullable|string|max:255',
-            'prenom' => 'nullable|string|max:255',
-            'rue_et_num' => 'nullable|string|max:255',
-            'npa_localite' => 'nullable|string|max:255',
-            'tel_fixe' => 'nullable|string|max:255',
-            'tel_portable' => 'nullable|string|max:255',
-            'email' => 'nullable|email|max:255',
-        ]);
-
-        $representant->update($validated);
-
-        return response()->json(['message' => 'success'], 200);
-    }
-
-    public function destroy(RepresentantLegal $representant)
-    {
-        $representant->delete();
-
-        return response()->json(['message' => 'deleted'], 200);
-    }
 }
