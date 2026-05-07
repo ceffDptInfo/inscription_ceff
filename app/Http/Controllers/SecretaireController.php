@@ -35,9 +35,24 @@ class SecretaireController extends Controller
         return back();
     }
 
-    public function showCandidat()
+    public function showCandidat($id)
     {
-        return inertia('secretaire/CandidatDetails');
+        $candidat = Candidat::with([
+            'donneesPersonnelles',
+            'representantsLegaux',
+            'parcoursScolaire',
+            'stages',
+            'autresInscriptions',
+            'compensations',
+            'autorisationHorsCanton',
+            'choixApprentissage'
+        ])->findOrFail($id);
+
+        Log::info($candidat);
+
+        return inertia('secretaire/CandidatDetails', [
+            'candidat' => $candidat,
+        ]);
     }
 
     public function deleteCandidat($id)

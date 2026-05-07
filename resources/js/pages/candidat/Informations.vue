@@ -121,7 +121,7 @@ const submit = () => {
                         <hr class="my-4 text-muted">
 
                         <div class="d-flex flex-column flex-md-row justify-content-md-end gap-3 mt-4">
-                            <a href="/autres-inscriptions" class="btn btn-light border px-4 py-2 fw-bold rounded-3 text-center">Précédent</a>
+                            <Link href="/autres-inscriptions" class="btn btn-light border px-4 py-2 fw-bold rounded-3 text-center">Précédent</Link>
                             <button type="submit" class="btn text-white px-5 py-2 fw-bold rounded-3" style="background-color: #38bdf8;" :disabled="form.processing">
                                 Suivant
                             </button>

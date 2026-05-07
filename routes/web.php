@@ -70,7 +70,7 @@ Route::middleware([EnsureCandidat::class])->group(function () {
 // secretaire routes
 Route::middleware('auth:secretaire')->group(function () {
     Route::get('/liste-candidats', [SecretaireController::class, 'index'])->name('liste-candidats');
-    Route::get('/candidat-details/{id}', [SecretaireController::class, 'showCandidat'])->name('candidat-details');
+    Route::get('/candidat-details/{id}', [SecretaireController::class, 'showCandidat']);
 
     Route::put('/liste-candidats/{id}/statut', [SecretaireController::class, 'updateStatut'])->name('liste-candidats.update-statut');
     Route::delete('/candidat/{id}', [SecretaireController::class, 'deleteCandidat'])->name('candidat.delete');
