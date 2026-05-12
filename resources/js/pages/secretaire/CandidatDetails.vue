@@ -171,8 +171,8 @@ const props = defineProps({
 
             <div class="mb-5">
                 <div class="d-flex align-items-center mb-3">
-                    <h3 class="h5 mb-0 me-3">3. Intérêts professionnels</h3>
-                    <Link :href="`/candidats/edit/${candidat.id}/interets-professionnels`" class="text-dark">
+                    <h3 class="h5 mb-0 me-3">3. Intérêts professionels</h3>
+                    <Link :href="`/candidats/edit/${candidat.id}/stages`" class="text-dark">
                         <i class="bi bi-pencil-square"></i>
                     </Link>
                 </div>
@@ -221,7 +221,7 @@ const props = defineProps({
             <div class="mb-5">
                 <div class="d-flex align-items-center mb-3">
                     <h3 class="h5 mb-0 me-3">4. Informations :</h3>
-                    <Link :href="`/secretariat/candidats/${candidat.id}/edit-info`" class="text-dark">
+                    <Link :href="`/candidats/edit/${candidat.id}/informations`" class="text-dark">
                         <i class="bi bi-pencil-square"></i>
                     </Link>
                 </div>
@@ -244,7 +244,7 @@ const props = defineProps({
             <div class="mb-5">
                 <div class="d-flex align-items-center mb-3">
                     <h3 class="h5 mb-0 me-3">5. Inscription pour un apprentissage de :</h3>
-                    <Link :href="`/secretariat/candidats/${candidat.id}/edit-choix`" class="text-dark">
+                    <Link :href="`/candidats/edit/${candidat.id}/choix-apprentissage`" class="text-dark">
                         <i class="bi bi-pencil-square"></i>
                     </Link>
                 </div>

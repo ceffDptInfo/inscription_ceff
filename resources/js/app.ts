@@ -25,7 +25,12 @@ createInertiaApp({
             'candidat/RepresentantsLegaux',
             'candidat/Stages',
             'secretaire/ListeCandidats',
-            'secretaire/CandidatDetails'
+            'secretaire/CandidatDetails',
+            'secretaire/EditDonneesPersonnelles',
+            'secretaire/EditParcoursScolaire',
+            'secretaire/EditInformations',
+            'secretaire/EditStages',
+            'secretaire/EditChoixApprentissage'
         ];
 
         if (noLayoutPages.includes(name)) {

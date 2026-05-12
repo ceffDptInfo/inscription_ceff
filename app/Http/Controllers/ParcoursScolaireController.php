@@ -65,4 +65,33 @@ class ParcoursScolaireController extends Controller
 
         return redirect()->route('stages')->with('success', 'parcours scolaire enregistré');
     }
+
+    public function update(Request $request, $id)
+    {
+        $validated = $request->validate([
+            'type_parcours' => 'nullable|string|max:255',
+            'nom_ecole' => 'nullable|string|max:255',
+            'lieu_ecole' => 'nullable|string|max:255',
+            'niveau_francais' => 'nullable|string|max:255',
+            'niveau_math' => 'nullable|string|max:255',
+            'niveau_allemand' => 'nullable|string|max:255',
+            'description_activite' => 'nullable|string',
+        ]);
+
+        ParcoursScolaire::updateOrCreate(
+            ['candidat_id' => $id],
+            $validated
+        );
+
+        return redirect("/candidat-details/{$id}");
+    }
+
+    public function edit($id)
+    {
+        $candidat = Candidat::with('parcoursScolaire')->findOrFail($id);
+
+        return inertia('secretaire/EditParcoursScolaire', [
+            'candidat' => $candidat
+        ]);
+    }
 }

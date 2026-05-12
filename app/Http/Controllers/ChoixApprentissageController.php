@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Candidat;
 use App\Models\ChoixApprentissage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -40,5 +41,29 @@ class ChoixApprentissageController extends Controller
         );
 
         return redirect()->route('annexes')->with('success', 'Choix apprentissage enregistre avec success');
+    }
+
+    public function edit($id)
+    {
+        $candidat = Candidat::with('choixApprentissage')->findOrFail($id);
+
+        return inertia('secretaire/EditChoixApprentissage', [
+            'candidat' => $candidat
+        ]);
+    }
+
+    public function update(Request $request, $id)
+    {
+        $validated = $request->validate([
+            'premier_choix' => 'nullable|string|max:255',
+            'deuxieme_choix' => 'nullable|string|max:255',
+        ]);
+
+        ChoixApprentissage::updateOrCreate(
+            ['candidat_id' => $id],
+            $validated
+        );
+
+        return redirect("/candidat-details/{$id}");
     }
 }

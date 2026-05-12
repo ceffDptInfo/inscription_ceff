@@ -61,7 +61,7 @@ class SecretaireController extends Controller
 
         $nomDossier = $candidat->dossier_nom;
 
-        Storage::disk('public')->deleteDirectory($nomDossier);
+        Storage::disk('dossiers_inscription')->deleteDirectory($nomDossier);
 
         $candidat->delete();
 

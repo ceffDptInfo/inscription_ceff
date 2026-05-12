@@ -62,7 +62,7 @@ class InformationsController extends Controller
                 ->first();
 
             if ($fichierCompensation) {
-                Storage::disk('public')->delete($fichierCompensation->chemin_fichier);
+                Storage::disk('dossiers_inscription')->delete($fichierCompensation->chemin_fichier);
                 $fichierCompensation->delete();
             }
         }
@@ -77,7 +77,7 @@ class InformationsController extends Controller
                 ->first();
 
             if ($fichierAutorisation) {
-                Storage::disk('public')->delete($fichierAutorisation->chemin_fichier);
+                Storage::disk('dossiers_inscription')->delete($fichierAutorisation->chemin_fichier);
                 $fichierAutorisation->delete();
             }
         }
@@ -93,5 +93,34 @@ class InformationsController extends Controller
         );
 
         return redirect()->route('choix-apprentissage')->with('success', 'donnees personnelles enregistrées');
+    }
+
+    public function edit($id)
+    {
+        $candidat = Candidat::with('autorisationHorsCanton', 'compensations')->findOrFail($id);
+
+        return inertia('secretaire/EditInformations', [
+            'candidat' => $candidat
+        ]);
+    }
+
+    public function update(Request $request, $id)
+    {
+        $validated = $request->validate([
+            'compensation_reponse' => 'required|boolean',
+            'autorisation_reponse' => 'required|boolean',
+        ]);
+
+        Compensations::updateOrCreate(
+            ['candidat_id' => $id],
+            ['reponse' => $validated['compensation_reponse']]
+        );
+
+        AutorisationHorsCanton::updateOrCreate(
+            ['candidat_id' => $id],
+            ['reponse' => $validated['autorisation_reponse']]
+        );
+
+        return redirect("/candidat-details/{$id}");
     }
 }

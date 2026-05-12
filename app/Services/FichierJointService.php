@@ -13,7 +13,7 @@ class FichierJointService
 
         $nomOriginal = $fichier->getClientOriginalName();
 
-        $chemin = $fichier->storeAs($dossierNom, $nomOriginal, 'public');
+        $chemin = $fichier->storeAs($dossierNom, $nomOriginal, 'dossiers_inscription');
 
         FichierJoint::updateOrCreate(
             ['candidat_id' => $candidat->id, 'type_document' => $typeDocument],

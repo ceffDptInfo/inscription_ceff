@@ -7,7 +7,6 @@ use App\Http\Controllers\AutreInscriptionController;
 use App\Http\Controllers\CandidatController;
 use App\Http\Controllers\ChoixApprentissageController;
 use App\Http\Controllers\DonneesPersonnellesController;
-use App\Http\Controllers\FormController;
 use App\Http\Controllers\InformationsController;
 use App\Http\Controllers\ParcoursScolaireController;
 use App\Http\Controllers\RepresentantLegalController;
@@ -74,6 +73,19 @@ Route::middleware('auth:secretaire')->group(function () {
 
     Route::put('/liste-candidats/{id}/statut', [SecretaireController::class, 'updateStatut'])->name('liste-candidats.update-statut');
     Route::delete('/candidat/{id}', [SecretaireController::class, 'deleteCandidat'])->name('candidat.delete');
+
+    Route::get('/candidats/edit/{id}/donnees-personnelles', [DonneesPersonnellesController::class, 'edit'])->name('donnees-personnelles.edit');
+    Route::get('/candidats/edit/{id}/parcours-scolaire', [ParcoursScolaireController::class, 'edit'])->name('parcours-scolaire.edit');
+    Route::get('/candidats/edit/{id}/informations', [InformationsController::class, 'edit'])->name('informations.edit');
+    Route::get('/candidats/edit/{id}/stages', [StageController::class, 'edit'])->name('stages.edit');
+    Route::get('/candidats/edit/{id}/choix-apprentissage', [ChoixApprentissageController::class, 'edit'])->name('choix-apprentissage.edit');
+
+
+    Route::put('/candidats/edit/{id}/donnees-personnelles', [DonneesPersonnellesController::class, 'update'])->name('donnees-personnelles.update');
+    Route::put('/candidats/edit/{id}/parcours-scolaire', [ParcoursScolaireController::class, 'update'])->name('parcours-scolaire.update');
+    Route::put('/candidats/edit/{id}/informations', [InformationsController::class, 'update'])->name('informations.update');
+    Route::put('/candidats/edit/{id}/stages', [StageController::class, 'update'])->name('stages.update');
+    Route::put('/candidats/edit/{id}/choix-apprentissage', [ChoixApprentissageController::class, 'update'])->name('choix-apprentissage.update');
 });
 
 
