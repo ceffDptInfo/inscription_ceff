@@ -21,6 +21,12 @@ const addInscription = () => {
     form.inscriptions.push({ etablissement: '', lieu: '' });
 };
 
+const removeInscription = (index) => {
+    if (index > 0) {
+        form.inscriptions.splice(index, 1);
+    }
+};
+
 const submit = () => {
     form.post('/autres-inscriptions');
 };
@@ -53,9 +59,14 @@ const submit = () => {
                                     <label class="d-md-none small text-muted fw-bold mb-1">Ecoles / Entreprises</label>
                                     <input type="text" class="form-control" v-model="inscription.etablissement">
                                 </div>
-                                <div class="col-12 col-md-4">
-                                    <label class="d-md-none small text-muted fw-bold mb-1">Lieu</label>
-                                    <input type="text" class="form-control" v-model="inscription.lieu">
+                                <div class="col-12 col-md-4 d-flex align-items-end align-items-md-center">
+                                    <div class="flex-grow-1">
+                                        <label class="d-md-none small text-muted fw-bold mb-1">Lieu</label>
+                                        <input type="text" class="form-control" v-model="inscription.lieu">
+                                    </div>
+                                    <button v-if="index > 0" type="button" class="btn text-danger fw-bold ms-2 px-2" @click="removeInscription(index)">
+                                        X
+                                    </button>
                                 </div>
                             </div>
                         </div>

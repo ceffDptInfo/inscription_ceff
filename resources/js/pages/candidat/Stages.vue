@@ -21,6 +21,12 @@ const addStage = () => {
     form.stages.push({ metier: '', entreprise: '', lieu: '', duree: '' });
 };
 
+const removeStage = (index) => {
+    if (index > 0) {
+        form.stages.splice(index, 1);
+    }
+};
+
 const submit = () => {
     form.post('/stages');
 };
@@ -63,9 +69,14 @@ const submit = () => {
                                     <label class="d-md-none small text-muted fw-bold mb-1">Lieu</label>
                                     <input type="text" class="form-control" v-model="stage.lieu">
                                 </div>
-                                <div class="col-12 col-md-3">
-                                    <label class="d-md-none small text-muted fw-bold mb-1">Durée</label>
-                                    <input type="text" class="form-control" v-model="stage.duree">
+                                <div class="col-12 col-md-3 d-flex align-items-end align-items-md-center">
+                                    <div class="flex-grow-1">
+                                        <label class="d-md-none small text-muted fw-bold mb-1">Durée</label>
+                                        <input type="text" class="form-control" v-model="stage.duree">
+                                    </div>
+                                    <button v-if="index > 0" type="button" class="btn text-danger fw-bold ms-2 px-2" @click="removeStage(index)">
+                                        X
+                                    </button>
                                 </div>
                             </div>
                         </div>

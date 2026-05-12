@@ -97,7 +97,7 @@ const submit = () => {
                                 <div class="row mb-3 align-items-center">
                                     <label class="col-12 col-md-4 col-form-label fw-medium">No AVS</label>
                                     <div class="col-12 col-md-8">
-                                        <input type="text" class="form-control" placeholder="756.xxxx.xxxx.xx" v-model="form.no_avs" required>
+                                        <input type="text" class="form-control" placeholder="756.xxxx.xxxx.xx" v-model="form.no_avs" pattern="^756\.\d{4}\.\d{4}\.\d{2}$" title="Le numéro AVS doit être au format 756.XXXX.XXXX.XX" required>
                                     </div>
                                 </div>
 

@@ -90,7 +90,7 @@ const submit = () => {
 
                         <div class="d-flex flex-column flex-md-row justify-content-end gap-3 mt-4">
                             <Link href="/informations" class="btn btn-light border px-4 py-2 fw-bold rounded-3 text-center">Précédent</Link>
-                            <button type="submit" class="btn text-white px-5 py-2 fw-bold rounded-3" style="background-color: #38bdf8;" :disabled="form.processing">
+                            <button type="submit" class="btn text-white px-5 py-2 fw-bold rounded-3" style="background-color: #38bdf8;" :disabled="form.processing || !form.premier_choix || !form.deuxieme_choix">
                                 Suivant
                             </button>
                         </div>
