@@ -5,8 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Mail\ConfirmationInscriptionMail;
 use App\Models\Candidat;
-use Illuminate\Support\Facades\Request;
-use Illuminate\Support\Str;
+// use Illuminate\Support\Facades\Request;
 use Inertia\Inertia;
 use Mail;
 
@@ -15,26 +14,6 @@ class CandidatController extends Controller
     public function index()
     {
         return route('candidats.index');
-    }
-
-    public function store(Request $request)
-    {
-        $validated = $request->validate([
-            'email' => 'required|email|unique:candidats,email',
-        ]);
-
-        $token = Str::random(64);
-
-        $candidat = Candidat::create([
-            'email' => $validated['email'],
-            'token' => $token,
-            'date_creation' => now(),
-            'statut' => 'Nouveau candidat',
-        ]);
-
-        return response()->json([
-            'message' => 'success',
-        ], 201);
     }
 
     public function show(Candidat $candidat)
