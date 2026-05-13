@@ -33,6 +33,15 @@ const deleteCandidat = (id) => {
         <AppHeader :showLogout="true" logoutRoute='/secretaire-logout' />
 
         <div class="container mt-4 mt-md-5">
+            
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2 class="h5 mb-0 text-secondary">Liste des candidats</h2>
+                <Link href="/secretaire/create" class="btn btn-primary text-white shadow-sm">
+                    Créer un compte secrétaire
+                </Link>
+            </div>
+
+        <div class="container mt-4 mt-md-5">
             <div class="table-responsive bg-white shadow-sm rounded">
                 <table class="table align-middle mb-0">
                     <thead class="bg-light text-secondary">
@@ -74,6 +83,7 @@ const deleteCandidat = (id) => {
                         </tr>
                     </tbody>
                 </table>
+            </div>
             </div>
         </div>
     </div>

@@ -7,9 +7,11 @@ use App\Models\Candidat;
 use App\Models\DonneesPersonnelles;
 use App\Models\Secretaire;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Storage;
 use Inertia\Response;
 
 beforeEach(function () {
+    Storage::fake('dossiers_inscription');
     Route::get('/donnees-personnelles', [DonneesPersonnellesController::class, 'index'])
         ->name('donnees-personnelles');
     Route::post('/donnees-personnelles', [DonneesPersonnellesController::class, 'store'])

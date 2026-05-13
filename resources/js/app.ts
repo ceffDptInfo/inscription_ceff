@@ -30,7 +30,8 @@ createInertiaApp({
             'secretaire/EditParcoursScolaire',
             'secretaire/EditInformations',
             'secretaire/EditStages',
-            'secretaire/EditChoixApprentissage'
+            'secretaire/EditChoixApprentissage',
+            'secretaire/CreateSecretaire'
         ];
 
         if (noLayoutPages.includes(name)) {

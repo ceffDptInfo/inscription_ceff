@@ -86,6 +86,11 @@ Route::middleware('auth:secretaire')->group(function () {
     Route::put('/candidats/edit/{id}/informations', [InformationsController::class, 'update'])->name('informations.update');
     Route::put('/candidats/edit/{id}/stages', [StageController::class, 'update'])->name('stages.update');
     Route::put('/candidats/edit/{id}/choix-apprentissage', [ChoixApprentissageController::class, 'update'])->name('choix-apprentissage.update');
+
+    Route::get('/secretaire/create', function () {
+        return inertia('secretaire/CreateSecretaire');
+    })->name('secretaire.create');
+    Route::post('/secretaire', [SecretaireAuthController::class, 'store'])->name('secretaire.store');
 });
 
 
