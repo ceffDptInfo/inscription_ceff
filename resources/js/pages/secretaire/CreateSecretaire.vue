@@ -19,7 +19,6 @@ const submitForm = () => {
     <div class="d-flex flex-column min-vh-100 bg-light">
         <AppHeader :showLogout="true" logoutRoute='/secretaire-logout' />
         
-        <!-- Bouton Retour en haut à gauche, en dehors de la carte de connexion -->
         <div class="container pt-4">
             <Link href="/liste-candidats" class="text-secondary text-decoration-none d-inline-flex align-items-center">
                 <span class="fs-4 me-2">&larr;</span> Retour

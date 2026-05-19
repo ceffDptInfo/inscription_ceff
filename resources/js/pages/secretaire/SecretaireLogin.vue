@@ -1,5 +1,5 @@
 <script setup>
-import { useForm } from '@inertiajs/vue3';
+import { useForm, Link } from '@inertiajs/vue3';
 import AppHeader from '@/components/AppHeader.vue';
 
 const form = useForm({
@@ -37,6 +37,9 @@ const submit = () => {
                     <div class="mb-4">
                         <input id="password" type="password" class="form-control bg-light px-4 py-3" v-model="form.password" placeholder="Mot de passe" required autocomplete="current-password">
                         <div v-if="form.errors.password" class="text-danger small mt-1">{{ form.errors.password }}</div>
+                        <div class="text-end mt-2">
+                            <Link href="/secretaire-reset-password" class="small text-muted text-decoration-none">Mot de passe oublié ?</Link>
+                        </div>
                     </div>
 
                     <div class="d-grid">

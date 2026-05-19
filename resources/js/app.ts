@@ -31,7 +31,9 @@ createInertiaApp({
             'secretaire/EditInformations',
             'secretaire/EditStages',
             'secretaire/EditChoixApprentissage',
-            'secretaire/CreateSecretaire'
+            'secretaire/CreateSecretaire',
+            'secretaire/ForgotPassword',
+            'secretaire/ResetPassword'
         ];
 
         if (noLayoutPages.includes(name)) {

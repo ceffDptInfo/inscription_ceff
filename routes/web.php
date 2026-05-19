@@ -13,6 +13,7 @@ use App\Http\Controllers\RepresentantLegalController;
 use App\Http\Controllers\SecretaireController;
 use App\Http\Controllers\StageController;
 use App\Http\Middleware\EnsureCandidat;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -30,6 +31,23 @@ Route::get('/secretaire-login', function () {
 
 Route::post('/secretaire-login', [SecretaireAuthController::class, 'login']);
 Route::post('/secretaire-logout', [SecretaireAuthController::class, 'logout'])->name('secretaire.logout');
+
+Route::get('/secretaire-reset-password', function () {
+    return inertia('secretaire/ForgotPassword');
+})->name('secretaire.password.request');
+
+Route::post('/secretaire-reset-password', [SecretaireAuthController::class, 'sendResetLinkEmail'])
+    ->name('secretaire.password.email');
+
+Route::get('/secretaire-reset-password/{token}', function (Request $request, $token) {
+    return inertia('secretaire/ResetPassword', [
+        'token' => $token,
+        'email' => $request->email,
+    ]);
+})->name('secretaire.password.reset');
+
+Route::post('/secretaire-reset-password/update', [SecretaireAuthController::class, 'reset'])
+    ->name('secretaire.password.update');
 
 //candidat login
 Route::get('/candidat-login', function () {
