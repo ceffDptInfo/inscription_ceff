@@ -43,6 +43,11 @@ Exécute les fichiers de migration pour structurer et créer l'ensemble des tabl
 php artisan migrate
 ```
 
+Un message vous demandant de créer une base de données SQLite vous sera ensuite demandé.
+```bash
+yes
+```
+
 **7. Création du compte secrétariat**
 Insère le compte utilisateur initial indispensable pour l'accès du secrétariat au panneau d'administration.
 ```bash
@@ -58,6 +63,5 @@ php artisan storage:link
 **9. Compilation et lancement**
 Compile les assets front-end puis démarre le serveur de développement local de Laravel.
 ```bash
-npm run build
-php artisan serve
+composer run dev
 ```
