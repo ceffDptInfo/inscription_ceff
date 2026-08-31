@@ -16,7 +16,8 @@ return new class extends Migration {
             $table->string('nom')->nullable();
             $table->string('prenom')->nullable();
             $table->string('rue_et_num')->nullable();
-            $table->string('npa_localite')->nullable();
+            $table->string('npa')->nullable();
+            $table->string('localite')->nullable();
             $table->date('date_naissance')->nullable();
             $table->string('langue_maternelle')->nullable();
             $table->string('no_avs')->nullable();

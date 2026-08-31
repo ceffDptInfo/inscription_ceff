@@ -12,7 +12,8 @@ const form = useForm({
     nom: props.donnees?.nom ?? '',
     prenom: props.donnees?.prenom ?? '',
     rue_et_num: props.donnees?.rue_et_num ?? '',
-    npa_localite: props.donnees?.npa_localite ?? '',
+    npa: props.donnees?.npa ?? '',
+    localite: props.donnees?.localite ?? '',
     date_naissance: props.donnees?.date_naissance ?? '',
     langue_maternelle: props.donnees?.langue_maternelle ?? '',
     no_avs: props.donnees?.no_avs ?? '',
@@ -74,9 +75,16 @@ const submit = () => {
                                 </div>
 
                                 <div class="row mb-3 align-items-center">
-                                    <label class="col-12 col-md-4 col-form-label fw-medium">NPA + Localité</label>
+                                    <label class="col-12 col-md-4 col-form-label fw-medium">NPA</label>
                                     <div class="col-12 col-md-8">
-                                        <input type="text" class="form-control" v-model="form.npa_localite" required>
+                                        <input type="text" class="form-control" v-model="form.npa" required>
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3 align-items-center">
+                                    <label class="col-12 col-md-4 col-form-label fw-medium">Localité</label>
+                                    <div class="col-12 col-md-8">
+                                        <input type="text" class="form-control" v-model="form.localite" required>
                                     </div>
                                 </div>
 

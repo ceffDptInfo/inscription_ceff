@@ -50,6 +50,10 @@ yes
 
 **7. Création du compte secrétariat**
 Insère le compte utilisateur initial indispensable pour l'accès du secrétariat au panneau d'administration.
+
+user : industrie_info@ceff.ch
+password : Pa$$w0rd
+
 ```bash
 php artisan db:seed --class=SecretaireSeeder
 ```
