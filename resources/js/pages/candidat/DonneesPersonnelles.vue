@@ -1,14 +1,54 @@
-<script setup>
+<script setup lang="ts">
 import { useForm } from '@inertiajs/vue3';
 import AppHeader from '@/components/AppHeader.vue';
 
-const props = defineProps({
-    donnees: Object,
-    fichier_permis: String,
-    fichier_photo: String
-});
+interface Donnees {
+    nom?: string;
+    prenom?: string;
+    rue_et_num?: string;
+    npa?: string;
+    localite?: string;
+    date_naissance?: string;
+    langue_maternelle?: string;
+    no_avs?: string;
+    tel_fixe?: string;
+    tel_portable?: string;
+    email_prive?: string;
+    genre?: string;
+    nationalite?: string;
+    pays_origine?: string;
+    type_permis?: string;
+    validite_permis?: string;
+    remarques?: string;
+}
 
-const form = useForm({
+const props = defineProps<{
+    donnees?: Donnees;
+    fichier_permis?: string;
+    fichier_photo?: string;
+}>();
+
+const form = useForm<{
+    nom: string;
+    prenom: string;
+    rue_et_num: string;
+    npa: string;
+    localite: string;
+    date_naissance: string;
+    langue_maternelle: string;
+    no_avs: string;
+    tel_fixe: string;
+    tel_portable: string;
+    email_prive: string;
+    genre: string;
+    nationalite: string;
+    pays_origine: string;
+    type_permis: string;
+    validite_permis: string;
+    document_permis: File | null;
+    photo_portrait: File | null;
+    remarques: string;
+}>({
     nom: props.donnees?.nom ?? '',
     prenom: props.donnees?.prenom ?? '',
     rue_et_num: props.donnees?.rue_et_num ?? '',
@@ -34,6 +74,16 @@ const submit = () => {
     form.post('/donnees-personnelles', {
         forceFormData: true, 
     });
+};
+
+const setDocumentPermis = (event: Event) => {
+    const target = event.target as HTMLInputElement;
+    form.document_permis = target.files?.[0] ?? null;
+};
+
+const setPhotoPortrait = (event: Event) => {
+    const target = event.target as HTMLInputElement;
+    form.photo_portrait = target.files?.[0] ?? null;
 };
 </script>
 
@@ -192,7 +242,7 @@ const submit = () => {
                                             <label for="document_permis" class="btn btn-outline-secondary w-100 d-block text-truncate mb-0 px-4">
                                                 {{ form.document_permis ? form.document_permis.name : (props.fichier_permis || '+') }}
                                             </label>
-                                            <input type="file" id="document_permis" class="d-none" @input="form.document_permis = $event.target.files[0]">
+                                            <input type="file" id="document_permis" class="d-none" @input="setDocumentPermis">
                                         </div>
                                     </div>
                                 </div>
@@ -203,7 +253,7 @@ const submit = () => {
                                         <label for="photo_portrait" class="btn btn-outline-secondary w-100 d-block text-truncate mb-0 px-4">
                                             {{ form.photo_portrait ? form.photo_portrait.name : (props.fichier_photo || '+') }}
                                         </label>
-                                        <input type="file" id="photo_portrait" class="d-none" accept="image/*" @input="form.photo_portrait = $event.target.files[0]">
+                                        <input type="file" id="photo_portrait" class="d-none" accept="image/*" @input="setPhotoPortrait">
                                     </div>
                                 </div>
 

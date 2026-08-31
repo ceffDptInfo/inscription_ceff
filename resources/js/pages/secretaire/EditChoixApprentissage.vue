@@ -1,10 +1,18 @@
-<script setup>
+<script setup lang="ts">
 import { useForm, Link } from '@inertiajs/vue3';
 import AppHeader from '@/components/AppHeader.vue';
 
-const props = defineProps({
-    candidat: Object
-});
+interface Candidat {
+    id: number;
+    choix_apprentissage?: {
+        premier_choix?: string;
+        deuxieme_choix?: string;
+    };
+}
+
+const props = defineProps<{
+    candidat: Candidat;
+}>();
 
 const choix = props.candidat?.choix_apprentissage || {};
 

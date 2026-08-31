@@ -1,14 +1,36 @@
-<script setup>
+<script setup lang="ts">
 import { useForm, Link } from '@inertiajs/vue3';
 import AppHeader from '@/components/AppHeader.vue';
 
-const props = defineProps({
-    parcours: Object,
-    bulletin: String,
-    cv: String,
-});
+type TypeParcours = 'Canton de Berne' | 'Autre / Etranger' | 'Autre activite';
 
-const form = useForm({
+interface Parcours {
+    type_parcours?: TypeParcours;
+    nom_ecole?: string;
+    lieu_ecole?: string;
+    niveau_francais?: string;
+    niveau_math?: string;
+    niveau_allemand?: string;
+    description_activite?: string;
+}
+
+const props = defineProps<{
+    parcours?: Parcours;
+    bulletin?: string;
+    cv?: string;
+}>();
+
+const form = useForm<{
+    type_parcours: TypeParcours;
+    nom_ecole: string;
+    lieu_ecole: string;
+    niveau_francais: string;
+    niveau_math: string;
+    niveau_allemand: string;
+    description_activite: string;
+    bulletin_scolaire: File | null;
+    cv: File | null;
+}>({
     type_parcours: props.parcours?.type_parcours ?? 'Canton de Berne',
     nom_ecole: props.parcours?.nom_ecole ?? '',
     lieu_ecole: props.parcours?.lieu_ecole ?? '',
@@ -19,6 +41,16 @@ const form = useForm({
     bulletin_scolaire: null,
     cv: null,
 });
+
+const setBulletinScolaire = (event: Event) => {
+    const target = event.target as HTMLInputElement;
+    form.bulletin_scolaire = target.files?.[0] ?? null;
+};
+
+const setCv = (event: Event) => {
+    const target = event.target as HTMLInputElement;
+    form.cv = target.files?.[0] ?? null;
+};
 
 const submit = () => {
     form.post('/parcours-scolaire', {
@@ -85,7 +117,7 @@ const submit = () => {
                                             <label for="bulletin_scolaire" class="btn btn-light border text-secondary w-100 d-flex justify-content-center align-items-center mb-0 text-truncate px-2" style="height: 38px;">
                                                 {{ form.bulletin_scolaire ? form.bulletin_scolaire.name : (bulletin || '+') }}
                                             </label>
-                                            <input type="file" id="bulletin_scolaire" class="d-none" @input="form.bulletin_scolaire = $event.target.files[0]">
+                                            <input type="file" id="bulletin_scolaire" class="d-none" @input="setBulletinScolaire">
                                         </div>
                                     </div>
                                 </template>
@@ -104,7 +136,7 @@ const submit = () => {
                                             <label for="cv" class="btn btn-light border text-secondary w-100 d-flex justify-content-center align-items-center mb-0 text-truncate px-2" style="height: 38px;">
                                                 {{ form.cv ? form.cv.name : (cv || '+') }}
                                             </label>
-                                            <input type="file" id="cv" class="d-none" @input="form.cv = $event.target.files[0]">
+                                            <input type="file" id="cv" class="d-none" @input="setCv">
                                         </div>
                                     </div>
                                 </template>

@@ -1,10 +1,91 @@
-<script setup>
+<script setup lang="ts">
 import { Link } from '@inertiajs/vue3';
 import AppHeader from '@/components/AppHeader.vue';
 
-const props = defineProps({
-    candidat: Object
-});
+interface Identifiable {
+    id: number;
+}
+
+interface DonneesPersonnelles {
+    nom?: string;
+    prenom?: string;
+    rue_et_num?: string;
+    npa_localite?: string;
+    date_naissance?: string;
+    langue_maternelle?: string;
+    no_avs?: string;
+    tel_fixe?: string;
+    tel_portable?: string;
+    genre?: string;
+    email_prive?: string;
+    nationalite?: string;
+    pays_origine?: string;
+    type_permis?: string;
+    validite_permis?: string;
+    remarques?: string;
+}
+
+interface RepresentantLegal extends Identifiable {
+    type_lien?: string;
+    nom?: string;
+    prenom?: string;
+    rue_et_num?: string;
+    npa_localite?: string;
+    tel_fixe?: string;
+    tel_portable?: string;
+    email?: string;
+}
+
+interface ParcoursScolaire {
+    type_parcours?: string;
+    nom_ecole?: string;
+    lieu_ecole?: string;
+    niveau_francais?: string;
+    niveau_allemand?: string;
+    niveau_math?: string;
+    description_activite?: string;
+}
+
+interface Stage extends Identifiable {
+    metier?: string;
+    entreprise?: string;
+    lieu?: string;
+    duree?: string;
+}
+
+interface AutreInscription extends Identifiable {
+    etablissement?: string;
+    lieu?: string;
+}
+
+interface Reponse {
+    reponse?: boolean | number;
+}
+
+interface ChoixApprentissage {
+    premier_choix?: string;
+    deuxieme_choix?: string;
+}
+
+interface Candidat {
+    id: number;
+    donnees_personnelles?: DonneesPersonnelles;
+    representants_legaux: RepresentantLegal[];
+    parcours_scolaire?: ParcoursScolaire;
+    stages: Stage[];
+    autres_inscriptions: AutreInscription[];
+    compensations?: Reponse;
+    autorisation_hors_canton?: Reponse;
+    choix_apprentissage?: ChoixApprentissage;
+}
+
+defineProps<{
+    candidat: Candidat;
+}>();
+
+const formatDate = (value?: string) => value
+    ? new Date(value).toLocaleDateString('fr-FR')
+    : '-';
 </script>
 
 <template>
@@ -42,7 +123,7 @@ const props = defineProps({
                             </tr>
                             <tr>
                                 <th class="bg-light fw-normal px-3 py-2 border-end">Date de naissance</th>
-                                <td class="px-3 py-2">{{ new Date(candidat.donnees_personnelles?.date_naissance).toLocaleDateString('fr-FR') }}</td>
+                                <td class="px-3 py-2">{{ formatDate(candidat.donnees_personnelles?.date_naissance) }}</td>
                             </tr>
                             <tr>
                                 <th class="bg-light fw-normal px-3 py-2 border-end">Langue maternelle</th>
@@ -82,7 +163,7 @@ const props = defineProps({
                                 </tr>
                                 <tr>
                                     <th class="bg-light fw-normal px-3 py-2 border-end">Validité du permis</th>
-                                    <td class="px-3 py-2">{{ new Date(candidat.donnees_personnelles?.validite_permis).toLocaleDateString('fr-FR') }}</td>
+                                    <td class="px-3 py-2">{{ formatDate(candidat.donnees_personnelles?.validite_permis) }}</td>
                                 </tr>
                             </template>
 

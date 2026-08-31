@@ -1,11 +1,20 @@
-<script setup>
-import { router } from '@inertiajs/vue3';
-import { Link } from '@inertiajs/vue3';
+<script setup lang="ts">
+import { Link, router } from '@inertiajs/vue3';
 import AppHeader from '@/components/AppHeader.vue';
 
-const props = defineProps({
-    candidats: Array
-});
+interface Candidat {
+    id: number;
+    email: string;
+    statut: string;
+    donnees_personnelles?: {
+        nom?: string;
+        prenom?: string;
+    };
+}
+
+defineProps<{
+    candidats: Candidat[];
+}>();
 
 const statuts = [
     'Nouveau Candidat',
@@ -15,13 +24,13 @@ const statuts = [
     'Convocation envoyée'
 ];
 
-const updateStatut = (id, nouveauStatut) => {
+const updateStatut = (id: number, nouveauStatut: string) => {
     router.put(`/liste-candidats/${id}/statut`, { statut: nouveauStatut }, {
         preserveScroll: true
     });
 };
 
-const deleteCandidat = (id) => {
+const deleteCandidat = (id: number) => {
     if (confirm('Voulez-vous vraiment supprimer ce candidat ainsi que tous ses informations / fichiers joints ?')) {
         router.delete(`/candidat/${id}`);
     }

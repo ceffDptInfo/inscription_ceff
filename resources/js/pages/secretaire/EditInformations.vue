@@ -1,10 +1,20 @@
-<script setup>
+<script setup lang="ts">
 import { useForm, Link } from '@inertiajs/vue3';
 import AppHeader from '@/components/AppHeader.vue';
 
-const props = defineProps({
-    candidat: Object
-});
+interface Candidat {
+    id: number;
+    compensations?: {
+        reponse?: boolean | number;
+    };
+    autorisation_hors_canton?: {
+        reponse?: boolean | number;
+    };
+}
+
+const props = defineProps<{
+    candidat: Candidat;
+}>();
 
 const form = useForm({
     compensation_reponse: props.candidat?.compensations?.reponse ? true : false,

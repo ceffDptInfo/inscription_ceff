@@ -1,18 +1,76 @@
-<script setup>
+<script setup lang="ts">
+import { useForm, Link} from '@inertiajs/vue3';
 import { ref } from 'vue';
-import { useForm, Link, router } from '@inertiajs/vue3';
 import AppHeader from '@/components/AppHeader.vue';
 
-const props = defineProps({
-    candidat: Object
-});
+type TypeLien = 'Pere' | 'Mere' | 'Autre';
+
+interface DonneesPersonnelles {
+    nom?: string;
+    prenom?: string;
+    rue_et_num?: string;
+    npa_localite?: string;
+    date_naissance?: string;
+    langue_maternelle?: string;
+    no_avs?: string;
+    tel_fixe?: string;
+    tel_portable?: string;
+    email_prive?: string;
+    genre?: string;
+    nationalite?: string;
+    pays_origine?: string;
+    type_permis?: string;
+    validite_permis?: string;
+    remarques?: string;
+}
+
+interface RepresentantLegal {
+    type_lien: TypeLien;
+    nom: string;
+    prenom: string;
+    rue_et_num: string;
+    npa_localite: string;
+    tel_fixe: string;
+    tel_portable: string;
+    email: string;
+}
+
+interface Candidat {
+    id: number;
+    donnees_personnelles?: DonneesPersonnelles;
+    representants_legaux?: Partial<RepresentantLegal>[];
+}
+
+const props = defineProps<{
+    candidat: Candidat;
+}>();
 
 const dp = props.candidat?.donnees_personnelles || {};
 const reps = props.candidat?.representants_legaux || [];
 
 const showSecondRep = ref(reps.length > 1);
 
-const form = useForm({
+const form = useForm<{
+    nom: string;
+    prenom: string;
+    rue_et_num: string;
+    npa_localite: string;
+    date_naissance: string;
+    langue_maternelle: string;
+    no_avs: string;
+    tel_fixe: string;
+    tel_portable: string;
+    email_prive: string;
+    genre: string;
+    nationalite: string;
+    pays_origine: string;
+    type_permis: string;
+    validite_permis: string;
+    remarques: string;
+    rep1: RepresentantLegal;
+    rep2: RepresentantLegal;
+    has_second_rep: boolean;
+}>({
     nom: dp.nom ?? '',
     prenom: dp.prenom ?? '',
     rue_et_num: dp.rue_et_num ?? '',

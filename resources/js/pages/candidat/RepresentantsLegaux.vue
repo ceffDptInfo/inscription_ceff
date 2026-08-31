@@ -1,18 +1,34 @@
-<script setup>
-import { ref } from 'vue';
+<script setup lang="ts">
 import { useForm, Link } from '@inertiajs/vue3';
+import { ref } from 'vue';
 import AppHeader from '@/components/AppHeader.vue';
 
-const props = defineProps({
-    reps: {
-        type: Array,
-        default: () => []
-    }
+type TypeLien = 'Pere' | 'Mere' | 'Autre';
+
+interface RepresentantLegal {
+    type_lien: TypeLien;
+    nom: string;
+    prenom: string;
+    rue_et_num: string;
+    npa_localite: string;
+    tel_fixe: string;
+    tel_portable: string;
+    email: string;
+}
+
+const props = withDefaults(defineProps<{
+    reps?: Partial<RepresentantLegal>[];
+}>(), {
+    reps: () => [],
 });
 
 const showSecondRep = ref(props.reps.length > 1);
 
-const form = useForm({
+const form = useForm<{
+    rep1: RepresentantLegal;
+    rep2: RepresentantLegal;
+    has_second_rep: boolean;
+}>({
     rep1: {
         type_lien: props.reps[0]?.type_lien ?? 'Pere',
         nom: props.reps[0]?.nom ?? '',
