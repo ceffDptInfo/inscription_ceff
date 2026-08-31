@@ -1,19 +1,27 @@
-<script setup>
+<script setup lang="ts">
 import { useForm, Link } from '@inertiajs/vue3';
 import AppHeader from '@/components/AppHeader.vue';
 
-const props = defineProps({
-    stages: {
-        type: Array,
-        default: () => []
-    }
+interface Stage {
+    metier: string;
+    entreprise: string;
+    lieu: string;
+    duree: string;
+}
+
+const props = withDefaults(defineProps<{
+    stages?: Stage[];
+}>(), {
+    stages: () => [],
 });
 
-const defaultStages = props.stages.length > 0 
-    ? props.stages 
+const defaultStages: Stage[] = props.stages.length > 0
+    ? props.stages
     : [{ metier: '', entreprise: '', lieu: '', duree: '' }];
 
-const form = useForm({
+const form = useForm<{
+    stages: Stage[];
+}>({
     stages: defaultStages
 });
 
@@ -21,7 +29,7 @@ const addStage = () => {
     form.stages.push({ metier: '', entreprise: '', lieu: '', duree: '' });
 };
 
-const removeStage = (index) => {
+const removeStage = (index: number) => {
     if (index > 0) {
         form.stages.splice(index, 1);
     }

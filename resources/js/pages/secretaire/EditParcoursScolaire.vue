@@ -1,14 +1,39 @@
-<script setup>
+<script setup lang="ts">
 import { useForm, Link } from '@inertiajs/vue3';
 import AppHeader from '@/components/AppHeader.vue';
 
-const props = defineProps({
-    candidat: Object
-});
+type TypeParcours = 'Canton de Berne' | 'Autre / Etranger' | 'Autre activite';
+
+interface ParcoursScolaire {
+    type_parcours?: TypeParcours;
+    nom_ecole?: string;
+    lieu_ecole?: string;
+    niveau_francais?: string;
+    niveau_math?: string;
+    niveau_allemand?: string;
+    description_activite?: string;
+}
+
+interface Candidat {
+    id: number;
+    parcours_scolaire?: ParcoursScolaire;
+}
+
+const props = defineProps<{
+    candidat: Candidat;
+}>();
 
 const parcours = props.candidat?.parcours_scolaire || {};
 
-const form = useForm({
+const form = useForm<{
+    type_parcours: TypeParcours;
+    nom_ecole: string;
+    lieu_ecole: string;
+    niveau_francais: string;
+    niveau_math: string;
+    niveau_allemand: string;
+    description_activite: string;
+}>({
     type_parcours: parcours.type_parcours ?? 'Canton de Berne',
     nom_ecole: parcours.nom_ecole ?? '',
     lieu_ecole: parcours.lieu_ecole ?? '',

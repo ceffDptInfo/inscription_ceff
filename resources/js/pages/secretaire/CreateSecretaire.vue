@@ -1,6 +1,6 @@
-<script setup>
-import AppHeader from '@/components/AppHeader.vue';
+<script setup lang="ts">
 import { useForm, Link } from '@inertiajs/vue3';
+import AppHeader from '@/components/AppHeader.vue';
 
 const form = useForm({
     email: '',

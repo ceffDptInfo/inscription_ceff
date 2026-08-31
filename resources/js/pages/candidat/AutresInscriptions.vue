@@ -1,13 +1,17 @@
-<script setup>
+<script setup lang="ts">
 import { useForm, Link } from '@inertiajs/vue3';
 import AppHeader from '@/components/AppHeader.vue';
 
-const props = defineProps({
-    inscriptions: {
-        type: Array,
-        default: () => []
-    }
-});
+interface Inscription {
+    etablissement: string;
+    lieu: string;
+}
+
+const props = withDefaults(defineProps<{
+        inscriptions? : Inscription[],
+    }>(),{
+        inscriptions: () => []
+    });
 
 const defaultInscriptions = props.inscriptions.length > 0 
     ? props.inscriptions 
@@ -21,7 +25,7 @@ const addInscription = () => {
     form.inscriptions.push({ etablissement: '', lieu: '' });
 };
 
-const removeInscription = (index) => {
+const removeInscription = (index:number) => {
     if (index > 0) {
         form.inscriptions.splice(index, 1);
     }

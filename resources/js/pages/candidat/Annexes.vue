@@ -1,17 +1,20 @@
-<script setup>
-import { ref } from 'vue';
+<script setup lang="ts">
 import { useForm } from '@inertiajs/vue3';
+import { ref } from 'vue';
 import AppHeader from '@/components/AppHeader.vue';
 
-const props = defineProps({
-    annexes: {
-        type: Array,
-        default: () => []
-    },
-    documents_manquants: {
-        type: Array,
-        default: () => []
-    }
+interface Annexe {
+    nom_fichier: string;
+    description: string;
+}
+
+
+const props = withDefaults(defineProps<{
+    annexes?: Annexe[];
+    documents_manquants?: string[];
+}>(), {
+    annexes: () => [],
+    documents_manquants: () => [],
 });
 
 const form = useForm({});

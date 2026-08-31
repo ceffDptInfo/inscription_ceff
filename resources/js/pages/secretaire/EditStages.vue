@@ -1,20 +1,41 @@
-<script setup>
+<script setup lang="ts">
 import { useForm, Link } from '@inertiajs/vue3';
 import AppHeader from '@/components/AppHeader.vue';
 
-const props = defineProps({
-    candidat: Object
-});
+interface Stage {
+    metier: string;
+    entreprise: string;
+    lieu: string;
+    duree: string;
+}
 
-const defaultStages = props.candidat?.stages?.length > 0 
-    ? props.candidat.stages 
+interface Inscription {
+    etablissement: string;
+    lieu: string;
+}
+
+interface Candidat {
+    id: number;
+    stages?: Stage[];
+    autres_inscriptions?: Inscription[];
+}
+
+const props = defineProps<{
+    candidat: Candidat;
+}>();
+
+const defaultStages: Stage[] = props.candidat.stages?.length
+    ? props.candidat.stages
     : [{ metier: '', entreprise: '', lieu: '', duree: '' }];
 
-const defaultInscriptions = props.candidat?.autres_inscriptions?.length > 0 
-    ? props.candidat.autres_inscriptions 
+const defaultInscriptions: Inscription[] = props.candidat.autres_inscriptions?.length
+    ? props.candidat.autres_inscriptions
     : [{ etablissement: '', lieu: '' }];
 
-const form = useForm({
+const form = useForm<{
+    stages: Stage[];
+    inscriptions: Inscription[];
+}>({
     stages: defaultStages,
     inscriptions: defaultInscriptions
 });

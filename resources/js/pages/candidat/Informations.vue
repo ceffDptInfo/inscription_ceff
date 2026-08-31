@@ -1,15 +1,20 @@
-<script setup>
+<script setup lang="ts">
 import { useForm, Link } from '@inertiajs/vue3';
 import AppHeader from '@/components/AppHeader.vue';
 
-const props = defineProps({
-    compensation: Boolean,
-    autorisation: Boolean,
-    fichier_compensation: String,
-    fichier_autorisation: String,
-});
+const props = defineProps<{
+    compensation?: boolean;
+    autorisation?: boolean;
+    fichier_compensation?: string;
+    fichier_autorisation?: string;
+}>();
 
-const form = useForm({
+const form = useForm<{
+    compensation_reponse: boolean;
+    document_compensation: File |null;
+    autorisation_reponse: boolean;
+    document_autorisation: File | null;
+}>({
     compensation_reponse: props.compensation ?? false,
     document_compensation: null,
     autorisation_reponse: props.autorisation ?? false,
@@ -20,6 +25,16 @@ const submit = () => {
     form.post('/informations', {
         forceFormData: true,
     });
+};
+
+const setDocumentCompensation = (event: Event) => {
+    const target = event.target as HTMLInputElement;
+    form.document_compensation = target.files?.[0] ?? null;
+};
+
+const setDocumentAutorisation = (event: Event) => {
+    const target = event.target as HTMLInputElement;
+    form.document_autorisation = target.files?.[0] ?? null;
 };
 </script>
 
@@ -66,7 +81,7 @@ const submit = () => {
                                 <label for="document_compensation" class="btn btn-outline-secondary w-100 d-block text-truncate mb-0 px-4 bg-white">
                                     {{ form.document_compensation ? form.document_compensation.name : (fichier_compensation || '+') }}
                                 </label>
-                                <input type="file" id="document_compensation" class="d-none" @input="form.document_compensation = $event.target.files[0]">
+                                <input type="file" id="document_compensation" class="d-none" @input="setDocumentCompensation">
                             </div>
                         </div>
                         <div v-else class="mb-4 mb-md-5"></div>
@@ -100,7 +115,7 @@ const submit = () => {
                                 <label for="document_autorisation" class="btn btn-outline-secondary w-100 d-block text-truncate mb-0 px-4 bg-white">
                                     {{ form.document_autorisation ? form.document_autorisation.name : (fichier_autorisation || '+') }}
                                 </label>
-                                <input type="file" id="document_autorisation" class="d-none" @input="form.document_autorisation = $event.target.files[0]">
+                                <input type="file" id="document_autorisation" class="d-none" @input="setDocumentAutorisation">
                             </div>
                         </div>
                         <div v-else class="mb-4 mb-md-5"></div>
