@@ -12,7 +12,8 @@ it('accepts mass assignment data', function () {
         'nom' => 'Doe',
         'prenom' => 'John',
         'rue_et_num' => 'Rue de la Gare 1',
-        'npa_localite' => '1000 Lausanne',
+        'npa' => '1000',
+        'localite' => 'Lausanne',
         'date_naissance' => '2005-08-15',
         'langue_maternelle' => 'Français',
         'no_avs' => '756.1234.5678.90',
@@ -31,7 +32,8 @@ it('accepts mass assignment data', function () {
         ->and($model->nom)->toBe('Doe')
         ->and($model->prenom)->toBe('John')
         ->and($model->rue_et_num)->toBe('Rue de la Gare 1')
-        ->and($model->npa_localite)->toBe('1000 Lausanne')
+        ->and($model->npa)->toBe('1000')
+        ->and($model->localite)->toBe('Lausanne')
         ->and($model->date_naissance)->toBe('2005-08-15')
         ->and($model->langue_maternelle)->toBe('Français')
         ->and($model->no_avs)->toBe('756.1234.5678.90')
