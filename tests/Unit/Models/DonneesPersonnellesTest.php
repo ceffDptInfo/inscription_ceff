@@ -22,6 +22,7 @@ it('accepts mass assignment data', function () {
         'email_prive' => 'john.doe@test.ch',
         'genre' => 'Homme',
         'nationalite' => 'Suisse',
+        'lieu_origine' => 'Sainti',
         'pays_origine' => '',
         'type_permis' => '',
         'validite_permis' => '',
@@ -42,6 +43,7 @@ it('accepts mass assignment data', function () {
         ->and($model->email_prive)->toBe('john.doe@test.ch')
         ->and($model->genre)->toBe('Homme')
         ->and($model->nationalite)->toBe('Suisse')
+        ->and($model->lieu_origine)->toBe('Sainti')
         ->and($model->pays_origine)->toBe('')
         ->and($model->type_permis)->toBe('')
         ->and($model->validite_permis)->toBe('')

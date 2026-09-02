@@ -16,6 +16,7 @@ interface Donnees {
     email_prive?: string;
     genre?: string;
     nationalite?: string;
+    lieu_origine?: string;
     pays_origine?: string;
     type_permis?: string;
     validite_permis?: string;
@@ -42,6 +43,7 @@ const form = useForm<{
     email_prive: string;
     genre: string;
     nationalite: string;
+    lieu_origine: string;
     pays_origine: string;
     type_permis: string;
     validite_permis: string;
@@ -62,6 +64,7 @@ const form = useForm<{
     email_prive: props.donnees?.email_prive ?? '',
     genre: props.donnees?.genre ?? '',
     nationalite: props.donnees?.nationalite ?? 'Suisse',
+    lieu_origine: props.donnees?.lieu_origine ?? '',
     pays_origine: props.donnees?.pays_origine ?? '',
     type_permis: props.donnees?.type_permis ?? '',
     validite_permis: props.donnees?.validite_permis ?? '',
@@ -202,6 +205,14 @@ const setPhotoPortrait = (event: Event) => {
                                             <option value="Suisse">Suisse</option>
                                             <option value="Autre">Autre</option>
                                         </select>
+                                    </div>
+                                </div>
+                                <div v-if="form.nationalite === 'Suisse'" class="mt-3">
+                                    <div class="row mb-3 align-items-center">
+                                        <label class="col-12 col-md-4 col-form-label fw-medium">Lieu d'origine</label>
+                                        <div class="col-12 col-md-8">
+                                            <input type="text" class="form-control" v-model="form.lieu_origine" required>
+                                        </div>
                                     </div>
                                 </div>
 

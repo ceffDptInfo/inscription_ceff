@@ -21,6 +21,7 @@ class DonneesPersonnelles extends Model
         'email_prive',
         'genre',
         'nationalite',
+        'lieu_origine',
         'pays_origine',
         'type_permis',
         'validite_permis',

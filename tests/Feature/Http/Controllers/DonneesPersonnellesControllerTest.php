@@ -72,6 +72,7 @@ it('enregistre les donnees personnelles via store', function () {
         'email_prive' => 'jane@test.ch',
         'genre' => 'Féminin',
         'nationalite' => 'Suisse',
+        'lieu_origine' => 'Sainti',
         'pays_origine' => 'Suisse',
     ];
 
@@ -116,6 +117,7 @@ it('permet a la secretaire d editer et modifier les donnees', function () {
         'npa' => '2610',
         'localite' => 'Saint-Imier',
         'nationalite' => 'Suisse',
+        'lieu_origine' => 'Sainti',
         'pays_origine' => 'Suisse',
         'rep1' => [
             'type_lien' => 'Père',

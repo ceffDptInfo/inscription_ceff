@@ -26,6 +26,7 @@ return new class extends Migration {
             $table->string('email_prive')->nullable();
             $table->string('genre')->nullable();
             $table->string('nationalite')->nullable();
+            $table->string('lieu_origine')->nullable();
             $table->string('pays_origine')->nullable();
             $table->string('type_permis')->nullable();
             $table->date('validite_permis')->nullable();
