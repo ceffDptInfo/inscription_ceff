@@ -15,7 +15,8 @@ class RepresentantLegal extends Model
         'nom',
         'prenom',
         'rue_et_num',
-        'npa_localite',
+        'npa',
+        'localite',
         'tel_fixe',
         'tel_portable',
         'email'

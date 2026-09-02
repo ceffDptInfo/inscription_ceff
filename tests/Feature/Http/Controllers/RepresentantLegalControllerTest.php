@@ -29,7 +29,7 @@ it('store avec un seul representant supprime le second si existant', function ()
 
     $this->withSession(['candidat_id' => $candidat->id])
         ->post(route('representants-legaux.store'), [
-            'rep1' => ['type_lien' => 'Mère', 'nom' => 'Martin', 'prenom' => 'A', 'rue_et_num' => 'Rue 1', 'npa_localite' => '2000 NE', 'tel_portable' => '079', 'email' => 'a@test.ch'],
+            'rep1' => ['type_lien' => 'Mère', 'nom' => 'Martin', 'prenom' => 'A', 'rue_et_num' => 'Rue 1', 'npa' => '2000','localite' => 'NE', 'tel_portable' => '079', 'email' => 'a@test.ch'],
             'has_second_rep' => false,
         ])
         ->assertRedirect(route('parcours-scolaire'))
@@ -44,9 +44,9 @@ it('store avec second representant', function () {
 
     $this->withSession(['candidat_id' => $candidat->id])
         ->post(route('representants-legaux.store'), [
-            'rep1' => ['type_lien' => 'Mère', 'nom' => 'Martin', 'prenom' => 'A', 'rue_et_num' => 'Rue 1', 'npa_localite' => '2000 NE', 'tel_portable' => '079', 'email' => 'a@test.ch'],
+            'rep1' => ['type_lien' => 'Mère', 'nom' => 'Martin', 'prenom' => 'A', 'rue_et_num' => 'Rue 1', 'npa' => '2000','localite' => 'NE', 'tel_portable' => '079', 'email' => 'a@test.ch'],
             'has_second_rep' => true,
-            'rep2' => ['type_lien' => 'Père', 'nom' => 'Dupont', 'prenom' => 'B', 'rue_et_num' => 'Rue 2', 'npa_localite' => '2001 NE', 'tel_portable' => '078', 'email' => 'b@test.ch'],
+            'rep2' => ['type_lien' => 'Père', 'nom' => 'Dupont', 'prenom' => 'B', 'rue_et_num' => 'Rue 2', 'npa' => '2001','localite' => 'NE', 'tel_portable' => '078', 'email' => 'b@test.ch'],
         ])
         ->assertRedirect(route('parcours-scolaire'));
 
