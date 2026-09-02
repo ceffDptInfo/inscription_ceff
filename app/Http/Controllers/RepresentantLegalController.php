@@ -29,7 +29,8 @@ class RepresentantLegalController extends Controller
             'rep1.nom' => 'nullable|string',
             'rep1.prenom' => 'nullable|string',
             'rep1.rue_et_num' => 'nullable|string',
-            'rep1.npa_localite' => 'nullable|string',
+            'rep1.npa' => 'nullable|string',
+            'rep1.localite' => 'nullable|string',
             'rep1.tel_portable' => 'nullable|string',
             'rep1.email' => 'nullable|email',
 
@@ -39,7 +40,8 @@ class RepresentantLegalController extends Controller
             'rep2.nom' => 'nullable|string',
             'rep2.prenom' => 'nullable|string',
             'rep2.rue_et_num' => 'nullable|string',
-            'rep2.npa_localite' => 'nullable|string',
+            'rep2.npa' => 'nullable|string',
+            'rep2.localite' => 'nullable|string',
             'rep2.tel_portable' => 'nullable|string',
             'rep2.email' => 'nullable|email',
         ]);

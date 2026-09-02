@@ -10,7 +10,8 @@ interface RepresentantLegal {
     nom: string;
     prenom: string;
     rue_et_num: string;
-    npa_localite: string;
+    npa: string;
+    localite: string;
     tel_fixe: string;
     tel_portable: string;
     email: string;
@@ -34,7 +35,8 @@ const form = useForm<{
         nom: props.reps[0]?.nom ?? '',
         prenom: props.reps[0]?.prenom ?? '',
         rue_et_num: props.reps[0]?.rue_et_num ?? '',
-        npa_localite: props.reps[0]?.npa_localite ?? '',
+        npa: props.reps[0]?.npa ?? '',
+        localite: props.reps[0]?.localite ?? '',
         tel_fixe: props.reps[0]?.tel_fixe ?? '',
         tel_portable: props.reps[0]?.tel_portable ?? '',
         email: props.reps[0]?.email ?? '',
@@ -44,7 +46,8 @@ const form = useForm<{
         nom: props.reps[1]?.nom ?? '',
         prenom: props.reps[1]?.prenom ?? '',
         rue_et_num: props.reps[1]?.rue_et_num ?? '',
-        npa_localite: props.reps[1]?.npa_localite ?? '',
+        npa: props.reps[1]?.npa ?? '',
+        localite: props.reps[1]?.localite ?? '',
         tel_fixe: props.reps[1]?.tel_fixe ?? '',
         tel_portable: props.reps[1]?.tel_portable ?? '',
         email: props.reps[1]?.email ?? '',
@@ -65,7 +68,8 @@ const removeSecondRep = () => {
         nom: '',
         prenom: '',
         rue_et_num: '',
-        npa_localite: '',
+        npa: '',
+        localite: '',
         tel_fixe: '',
         tel_portable: '',
         email: ''
@@ -127,9 +131,16 @@ const submit = () => {
                                 </div>
 
                                 <div class="row mb-3 align-items-center">
-                                    <label class="col-12 col-md-4 col-form-label fw-medium">NPA Localité</label>
+                                    <label class="col-12 col-md-4 col-form-label fw-medium">NPA</label>
                                     <div class="col-12 col-md-8">
-                                        <input type="text" class="form-control" v-model="form.rep1.npa_localite" required>
+                                        <input type="text" class="form-control" v-model="form.rep1.npa" required>
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3 align-items-center">
+                                    <label class="col-12 col-md-4 col-form-label fw-medium">Localité</label>
+                                    <div class="col-12 col-md-8">
+                                        <input type="text" class="form-control" v-model="form.rep1.localite" required>
                                     </div>
                                 </div>
 
@@ -196,9 +207,16 @@ const submit = () => {
                                 </div>
 
                                 <div class="row mb-3 align-items-center">
-                                    <label class="col-12 col-md-4 col-form-label fw-medium">NPA Localité</label>
+                                    <label class="col-12 col-md-4 col-form-label fw-medium">NPA</label>
                                     <div class="col-12 col-md-8">
-                                        <input type="text" class="form-control" v-model="form.rep2.npa_localite">
+                                        <input type="text" class="form-control" v-model="form.rep2.npa">
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3 align-items-center">
+                                    <label class="col-12 col-md-4 col-form-label fw-medium">Localité</label>
+                                    <div class="col-12 col-md-8">
+                                        <input type="text" class="form-control" v-model="form.rep2.localite">
                                     </div>
                                 </div>
 
