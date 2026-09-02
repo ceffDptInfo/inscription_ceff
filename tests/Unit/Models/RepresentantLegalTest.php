@@ -20,7 +20,8 @@ it('accepts mass assignment data', function () {
         'nom' => 'Doe',
         'prenom' => 'John',
         'rue_et_num' => 'Rue test 1',
-        'npa_localite' => '1000 Lausanne',
+        'npa' => '1000',
+        'localite' => 'Lausanne',
         'tel_fixe' => '0210000000',
         'tel_portable' => '0790000000',
         'email' => 'parent@test.com'
@@ -32,7 +33,8 @@ it('accepts mass assignment data', function () {
         ->and($model->nom)->toBe('Doe')
         ->and($model->prenom)->toBe('John')
         ->and($model->rue_et_num)->toBe('Rue test 1')
-        ->and($model->npa_localite)->toBe('1000 Lausanne')
+        ->and($model->npa)->toBe('1000')
+        ->and($model->localite)->toBe('Lausanne')
         ->and($model->tel_fixe)->toBe('0210000000')
         ->and($model->tel_portable)->toBe('0790000000')
         ->and($model->email)->toBe('parent@test.com');
